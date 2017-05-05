@@ -16,7 +16,9 @@ using namespace std;
   struct Pelaaja{
     vector<Kortti> kasi;
     int nmr;
+    //Onko pelaajalla ristiseiska
     int ristiseiska;
+    //Onko pelaaja sanonut ohi
     int ohi;
     vector<pair<int,int> > maara;
     /*int eniten;
@@ -51,17 +53,17 @@ using namespace std;
 	  for(int i = 0; i < pel->kasi.size(); ++i){
 		  int maa = pel->kasi[i].maa;
 		  switch(maa){
-			  case PATA:
-              pel->maara[0].first++;
+		    case PATA:
+		       pel->maara[0].first++;
 			  break;
 			  case RUUTU:
-			  pel->maara[1].first++;
+			    pel->maara[1].first++;
 			  break;
 			  case RISTI:
-			  pel->maara[2].first++;
+			    pel->maara[2].first++;
 			  break;
 			  case HERTTA:
-			  pel->maara[3].first++;
+			    pel->maara[3].first++;
 			  break;
 		  }
 	  }
@@ -70,37 +72,43 @@ using namespace std;
   }
   
   int onkoLaitettu(int maa,int arvo, Kortti poyta[13][4]){
+		//Onko kortti laitettu jo pöytään
     return poyta[arvo-1][maa].maa == EI_KORTTIA ? 0 : 1;
   }
   
   int voikoLaittaa(int arvo,int maa, Kortti poyta[13][4]){
   
-  
+    //Voiko jonkun kortin laittaa
     int voiko = 0;
 	
     if(arvo == 7){
       if(maa == RISTI){
+				//Ristiseiskalla aloitetaan
         voiko = 1;
       }
       else{
+				//Muita seiskoja voi laittaa ristiseiskan jälkeen
         voiko = onkoLaitettu(RISTI,7,poyta);
 
       }
     }
     else
       if(arvo == 8){
+				//Kasin voi laittaa saman maan kutosen jälkeen
         voiko = onkoLaitettu(maa,6,poyta);
       }
       else
       if(arvo == 6){
-          voiko = onkoLaitettu(maa,7,poyta);
+				//Kutosen voi laittaa aina seiskan jälkeen
+        voiko = onkoLaitettu(maa,7,poyta);
       }
+		    //Muut kortit voi laittaa kun joko ylempi tai alempi saman maan kortti on laitettu
         else
           if(arvo<6){
-          voiko = onkoLaitettu(maa,arvo+1,poyta) && onkoLaitettu(maa,8,poyta);
+            voiko = onkoLaitettu(maa,arvo+1,poyta) && onkoLaitettu(maa,8,poyta);
         }
         else{
-          voiko = onkoLaitettu(maa,arvo-1,poyta);
+            voiko = onkoLaitettu(maa,arvo-1,poyta);
         }
 
     return voiko;
@@ -112,15 +120,15 @@ using namespace std;
   
   int siirra(int a, int m, Kortti poyta[13][4],vector<Kortti> *kasi){
 	
-    //Siirrä kädestä pöytään
+    //Siirrä kortti kädestä pöytään
     
     for(int i = 0; i<kasi->size(); ++i){
       
-      if((*kasi)[i].arvo == a && (*kasi)[i].maa == m){
-        
+      if( (*kasi)[i].arvo == a && (*kasi)[i].maa == m ){
+        //Poistetaan kortti kädestä
         kasi->erase(kasi->begin()+i);
-      lisaaPoytaan(Kortti(m,a),poyta);
-      return 1;
+        lisaaPoytaan(Kortti(m,a),poyta);
+        return 1;
       
       }
       
@@ -150,6 +158,7 @@ Kortti otaKortti(vector<Pelaaja> *pelaajat,int vuorossa){
 
   
 void sleep(unsigned int s){
+	//Odottaa sekunnin
 	clock_t goal = s * 1000 + clock();
 	while(goal>clock());
 }
@@ -264,7 +273,7 @@ bool vertaile(pair<int,int> i,pair<int,int> j){
 		     if(voiLaittaa){
 		       voiLaittaa = siirra(arvo, maa, poyta,&(pelaajat[vuorossa].kasi));
 		     }
-			 komentoOk = voiLaittaa;
+			   komentoOk = voiLaittaa;
 		    }
 		   }
 		}
