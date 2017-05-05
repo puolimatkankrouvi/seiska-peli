@@ -85,16 +85,16 @@ using namespace std;
   }
 
   string maaksi(int m){
-	//Muuttaa maan int arvon väliltä 0-3
-	//string:ksi
+    //Muuttaa maan int arvon väliltä 0-3
+    //string:ksi
     string maa = "";
     switch(m){
-	  case 0: maa = "pat"; break;
+      case 0: maa = "pat"; break;
       case 1: maa = "ruut"; break;
       case 2: maa = "ris"; break;
       case 3: maa = "hert"; break;	  
-	}
-	return maa;
+    }
+    return maa;
   }
 
   Kortti::Kortti() {
