@@ -6,6 +6,8 @@ using namespace std;
 
 
   string arvoksi(int nmr){
+	//Muuttaa kortin arvon
+	//int -> string
     string a;
 	switch(nmr){
 	  case 1:
@@ -53,6 +55,8 @@ using namespace std;
   }
   
   int arvosta(string arvo){
+	//Muuttaa kortin arvon
+	//string -> int
     int a;
 	
 	if(arvo.compare("A")==0){
@@ -81,6 +85,8 @@ using namespace std;
   }
 
   string maaksi(int m){
+	//Muuttaa maan int arvon väliltä 0-3
+	//string:ksi
     string maa = "";
     switch(m){
 	  case 0: maa = "pat"; break;
@@ -103,13 +109,19 @@ using namespace std;
   
   void sekoita(vector<Kortti> *pakka){
     //Fischer-Yates algoritmi
+	  
+	//Satunnainen seed nykyisestä ajanhetkestä
+	//Tekee sekoituksesta satunnaisen
 	srand(time(NULL));
-	for(int i=pakka->size()-1; i>0;i--){
+	//Pakka käydään lopusta alkuun
+	for(int i=pakka->size()-1; i > 0; i--){
 	  int j = rand()%i;
+	  //Vaihdetaan kortin i ja satunnaisen kortin j paikkaa
 	  Kortti tmp = pakka->at(i);
 	  pakka->at(i) = pakka->at(j);
 	  pakka->at(j) = tmp;
 	}
+	
 	
   }
   
