@@ -11,21 +11,21 @@
 
 
   
-  std::string arvoksi(int nmr);
-  int arvosta(std::string arvo);
-  std::string maaksi(int m);
+std::string arvoksi(int nmr);
+int arvosta(std::string arvo);
+std::string maaksi(int m);
   
-  struct Kortti{
-    int maa;
-    int arvo;
-    Kortti();
-    Kortti(int m,int a);
-  };
+struct Kortti{
+  int maa;
+  int arvo;
+  Kortti();
+  Kortti(int m,int a);
+};
  
   
-  void sekoita(std::vector<Kortti> *pakka);
+void sekoita(std::vector<Kortti> *pakka);
   
-  std::vector<Kortti> luo();
+std::vector<Kortti> luo();
   
   
   
