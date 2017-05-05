@@ -1,5 +1,5 @@
-  #include <vector>
-  #include <string>
+#include <vector>
+#include <string>
 
 #define IHMISPELAAJA 0
   
@@ -18,7 +18,7 @@
   struct Kortti{
     int maa;
     int arvo;
-	Kortti();
+    Kortti();
     Kortti(int m,int a);
   };
  
