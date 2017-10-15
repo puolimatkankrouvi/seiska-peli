@@ -74,36 +74,35 @@ using namespace std;
   int voikoLaittaa(int arvo,int maa, Kortti poyta[13][4]){
   
     int voiko = 0;
-  
-    if(arvo == 7){
-      //Ristiseiskalla aloitetaan
-      if(maa == RISTI){
-        voiko = 1;
-      }
-      else{
-        //Muita seiskoja voi laittaa ristiseiskan jälkeen
-        voiko = onkoLaitettu(RISTI,7,poyta);
-
-      }
-    }
-    else{
-      if(arvo == 8){
+    
+    
+    switch(arvo){
+      case 7:
+        if(maa == RISTI){
+          voiko = 1;
+        }
+        else{
+          //Muita seiskoja voi laittaa ristiseiskan jälkeen
+          voiko = onkoLaitettu(RISTI,7,poyta);
+        }
+        break;
+      case 8:
         //Kasin voi laittaa saman maan kutosen jälkeen
         voiko = onkoLaitettu(maa,6,poyta);
-      }
-      else
-        if(arvo == 6){
-          //Kutosen voi laittaa aina seiskan jälkeen
-          voiko = onkoLaitettu(maa,7,poyta);
+        break;
+      case 6:
+        //Kutosen voi laittaa aina seiskan jälkeen
+        voiko = onkoLaitettu(maa,7,poyta);
+        break;
+      default:
+        //Muut kortit voi laittaa kun joko ylempi tai alempi saman maan kortti on laitettu
+        if(arvo<6){
+          voiko = onkoLaitettu(maa,arvo+1,poyta) && onkoLaitettu(maa,8,poyta);
         }
-        else
-          //Muut kortit voi laittaa kun joko ylempi tai alempi saman maan kortti on laitettu
-          if(arvo<6){
-            voiko = onkoLaitettu(maa,arvo+1,poyta) && onkoLaitettu(maa,8,poyta);
-          }
-          else{
-            voiko = onkoLaitettu(maa,arvo-1,poyta);
-          }
+        else{
+          voiko = onkoLaitettu(maa,arvo-1,poyta);
+        }
+        break;
     }
 
     return voiko;
