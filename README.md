@@ -1,1 +1,2 @@
-"# seiska-peli" 
+"# seiska-peli"
+Komentoriviversio seiska-korttipelistä
